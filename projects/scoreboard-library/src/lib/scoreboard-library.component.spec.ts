@@ -25,7 +25,8 @@ describe('ScoreboardLibrary', () => {
 
     component.startNewMatch(homeTeam,awayTeam);
 
-    const currentMatch = component.getCurrentMatch();
+    const activeMatches = component.getActiveMatches();
+    const currentMatch =activeMatches[activeMatches.length-1];
 
     expect(currentMatch.homeTeam).toBe(homeTeam)
     expect(currentMatch.awayTeam).toBe(awayTeam)

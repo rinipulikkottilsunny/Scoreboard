@@ -20,20 +20,16 @@ interface Match{
 })
 export class ScoreboardLibraryComponent {
 
-  private currentMatch : Match={
-    homeTeam: '',
-    awayTeam: '',
-    homeTeamScore: 0,
-    awayTeamScore: 0
-  };
+  private activeMatches : Match[]=[];
 
-  getCurrentMatch() : Match{
-    return this.currentMatch;
+  getActiveMatches() : Match[]{
+    return this.activeMatches;
   }
  
 
   startNewMatch(homeTeam: string, awayTeam: string) {
-    this.currentMatch={homeTeam,awayTeam,homeTeamScore:0,awayTeamScore:0}
+    const newMatch={homeTeam,awayTeam,homeTeamScore:0,awayTeamScore:0}
+    this.activeMatches.push(newMatch);
   }
 
 }
