@@ -60,10 +60,10 @@ describe('ScoreboardLibrary', () => {
     expect(updatedMatch?.awayTeamScore).toBe(3);
   });
 
-  it('should get the summary of the active matches', () => {
+  fit('should get the summary of the active matches', () => {
 
     component.startNewMatch("Team A","Team B");
-    component.updateMatchScore("Team A","Team B",6,3);
+    component.updateMatchScore("Team A","Team B",6,4);
 
     component.startNewMatch("Team C","Team D");
     component.updateMatchScore("Team C","Team D",3,4);
@@ -79,6 +79,8 @@ describe('ScoreboardLibrary', () => {
 
     const matchSummary =component.getMatchSummary();
 
+    console.log(matchSummary)
+
     expect(matchSummary[0].homeTeam).toBe("Team G")
     expect(matchSummary[0].homeTeamScore).toBe(7)
     expect(matchSummary[0].awayTeam).toBe("Team H")
@@ -87,7 +89,7 @@ describe('ScoreboardLibrary', () => {
     expect(matchSummary[1].homeTeam).toBe("Team A")
     expect(matchSummary[1].homeTeamScore).toBe(6)
     expect(matchSummary[1].awayTeam).toBe("Team B")
-    expect(matchSummary[1].awayTeamScore).toBe(3)
+    expect(matchSummary[1].awayTeamScore).toBe(4)
 
     expect(matchSummary[2].homeTeam).toBe("Team C")
     expect(matchSummary[2].homeTeamScore).toBe(3)

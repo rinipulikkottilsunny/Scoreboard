@@ -5,6 +5,7 @@ interface Match{
   awayTeam: string;
   homeTeamScore: number;
   awayTeamScore:number;
+  startTime:number;
 }
 
 @Component({
@@ -30,7 +31,12 @@ export class ScoreboardLibraryComponent {
     totalScore: match.homeTeamScore + match.awayTeamScore
   }))
   .sort((a, b) =>{
+    if(a.totalScore !== b.totalScore) {
       return b.totalScore - a.totalScore;
+     }
+     else{
+      return b.startTime - a.startTime;
+     } 
   });
   return sortedMatches;
   }
@@ -53,7 +59,8 @@ export class ScoreboardLibraryComponent {
  
 
   startNewMatch(homeTeam: string, awayTeam: string) {
-    const newMatch={homeTeam,awayTeam,homeTeamScore:0,awayTeamScore:0}
+    const newMatch={homeTeam,awayTeam,homeTeamScore:0,awayTeamScore:0,startTime:Date.now()}
+    console.log(Date.now());
     this.activeMatches.push(newMatch);
   }
 
