@@ -6,6 +6,7 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng generate component component-name --project scoreboardLibrary` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project scoreboardLibrary`.
 > Note: Don't forget to add `--project scoreboardLibrary` or else it will be added to the default project in your `angular.json` file. 
+> To start new match
 
 ## Build
 
