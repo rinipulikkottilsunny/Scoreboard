@@ -2,9 +2,8 @@ import { Team } from "../../../core/models/team.interface";
 import { Match } from "./match.interface";
 
 export interface Scoreboard {
-    startNewMatch(homeTeam: string, awayTeam: string): void;
-    updateMatchScore(homeTeam: Team, awayTeam: Team): void;
-    endMatch(homeTeam: Team, awayTeam: Team): void;
+    startNewMatch(homeTeamName: string, awayTeamName: string): boolean;
+    updateMatchScore(homeTeam: Team, awayTeam: Team): boolean;
+    endMatch(homeTeamName: string, awayTeamName: string): boolean;
     getMatchSummary(): Match[];
-    getActiveMatches(): Match[];
   }

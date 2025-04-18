@@ -6,11 +6,10 @@ import { Match } from '../models/match.interface';
 
 describe('FootballScoreboardService', () => {
   let service: FootballScoreboardService;
-  let mockMatches: Match[] = [];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [FootballScoreboardService,{provide: 'matches', useValue: mockMatches}],
+      providers: [FootballScoreboardService],
     });
     service = TestBed.inject(FootballScoreboardService);
   });
@@ -25,7 +24,7 @@ describe('FootballScoreboardService', () => {
     const awayTeamName="Team B";
 
     const initialActiveMatchesCount =service.getActiveMatches().length;
-    service.startNewMatch(homeTeamName,awayTeamName);
+    const ismatchCreated = service.startNewMatch(homeTeamName,awayTeamName);
 
     const activeMatches = service.getActiveMatches();
     const currentMatch =activeMatches[activeMatches.length-1];
@@ -35,24 +34,27 @@ describe('FootballScoreboardService', () => {
     expect(currentMatch.homeTeam.score).toBe(0)
     expect(currentMatch.awayTeam.score).toBe(0)
     expect(activeMatches.length).toBe(initialActiveMatchesCount+1)
+    expect(ismatchCreated).toBe(true);
+    console.log("active matches",service.getMatchSummary());
   });
 
   
   it('should end the active match', () => {
 
-    const homeTeam : Team= {name:"Team C"};
-    const awayTeam: Team= {name:"Team D"};
+    const homeTeamName= "Team A";
+    const awayTeamName="Team B";
 
-    service.startNewMatch(homeTeam.name,awayTeam.name);
+    service.startNewMatch(homeTeamName,awayTeamName);
     const initialActiveMatchesCount =service.getActiveMatches().length;
-    service.endMatch(homeTeam,awayTeam);
+    service.endMatch(homeTeamName,awayTeamName);
     const activeMatches = service.getActiveMatches();
     expect(activeMatches.length).toBe(initialActiveMatchesCount-1)
   });
 
     it('should update match score', () => {
-      const homeTeam : Team= {name:"Team C", score: 2};
-      const awayTeam: Team= {name:"Team D", score: 3};
+
+      const homeTeam : Team= {name:"Team E", score: 2};
+      const awayTeam: Team= {name:"Team F", score: 3};
 
     service.startNewMatch(homeTeam.name,awayTeam.name);
     service.updateMatchScore(homeTeam,awayTeam);
@@ -64,31 +66,27 @@ describe('FootballScoreboardService', () => {
 
 
   it('should get the summary of the active matches', () => {
+    const matches : Match[] =[
+      {homeTeam: {name: "Team A",score:6},awayTeam: {name: "Team B",score: 4},startTime: 1745009359889},
+      {homeTeam: {name: "Team C",score:3},awayTeam: {name: "Team D",score: 4},startTime: 1745009359890},
+      {homeTeam: {name: "Team E",score:1},awayTeam: {name: "Team F",score: 3},startTime: 1745009359891},
+      {homeTeam: {name: "Team G",score:2},awayTeam: {name: "Team H",score: 3},startTime: 1745009359892},
+      {homeTeam: {name: "Team I",score:7},awayTeam: {name: "Team J",score: 3},startTime: 1745009359893},
+    ]
     
-    const matches = [
-      { homeTeam: "Team A", awayTeam: "Team B", homeTeamScore: 6, awayTeamScore: 4 },
-      { homeTeam: "Team C", awayTeam: "Team D", homeTeamScore: 3, awayTeamScore: 4 },
-      { homeTeam: "Team E", awayTeam: "Team F", homeTeamScore: 1, awayTeamScore: 3 },
-      { homeTeam: "Team G", awayTeam: "Team H", homeTeamScore: 7, awayTeamScore: 3 },
-      { homeTeam: "Team I", awayTeam: "Team J", homeTeamScore: 2, awayTeamScore: 3 },
-    ];
+  
+    service.setActiveMatches(matches);
 
     const summary = [
-      { homeTeam: "Team G", awayTeam: "Team H", homeTeamScore: 7, awayTeamScore: 3 },
+      { homeTeam: "Team I", awayTeam: "Team J", homeTeamScore: 7, awayTeamScore: 3 },
       { homeTeam: "Team A", awayTeam: "Team B", homeTeamScore: 6, awayTeamScore: 4 },
       { homeTeam: "Team C", awayTeam: "Team D", homeTeamScore: 3, awayTeamScore: 4 },
-      { homeTeam: "Team I", awayTeam: "Team J", homeTeamScore: 2, awayTeamScore: 3 },
+      { homeTeam: "Team G", awayTeam: "Team H", homeTeamScore: 2, awayTeamScore: 3 },
       { homeTeam: "Team E", awayTeam: "Team F", homeTeamScore: 1, awayTeamScore: 3 },
     ];
-  
-    // Start matches and update scores
-    for (const match of matches) {
-      service.startNewMatch(match.homeTeam, match.awayTeam);
-      service.updateMatchScore({name:match.homeTeam,score:match.homeTeamScore}, {name:match.awayTeam,score:match.awayTeamScore});
-    }
+    
     const matchSummary = service.getMatchSummary();
-  
-    // Validate match summary
+
     for (let i = 0; i < summary.length; i++) {
       const expectedMatch = summary[i];
       const actualMatch = matchSummary[i];
