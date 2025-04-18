@@ -2,10 +2,12 @@
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
 
-## Code scaffolding
+##  The library is capable of:
 
-Run `ng generate component component-name --project scoreboardLibrary` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project scoreboardLibrary`.
-> Note: Don't forget to add `--project scoreboardLibrary` or else it will be added to the default project in your `angular.json` file. 
+To start new match
+To finish the active match
+To update the score of the match
+To get the ordered summary of active matches
 
 ## Build
 
