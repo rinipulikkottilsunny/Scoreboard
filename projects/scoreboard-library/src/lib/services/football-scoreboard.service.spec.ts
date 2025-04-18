@@ -1,21 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ScoreboardLibraryComponent } from './scoreboard-library.component';
+import { TestBed } from '@angular/core/testing';
+import { FootballScoreboardService } from './football-scoreboard.service';
 
 
-describe('ScoreboardLibrary', () => {
-  let component: ScoreboardLibraryComponent;
-  let fixture: ComponentFixture<ScoreboardLibraryComponent>;
+describe('FootballScoreboardService', () => {
+  let service: FootballScoreboardService;
 
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(FootballScoreboardService);
+  });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ScoreboardLibraryComponent]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(ScoreboardLibraryComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  it('should be created', () => {
+    expect(service).toBeTruthy();
   });
 
   it('should start new match', () => {
@@ -23,10 +19,10 @@ describe('ScoreboardLibrary', () => {
     const homeTeam= "Team A";
     const awayTeam="Team B";
 
-    const initialActiveMatchesCount =component.getActiveMatches().length;
-    component.startNewMatch(homeTeam,awayTeam);
+    const initialActiveMatchesCount =service.getActiveMatches().length;
+    service.startNewMatch(homeTeam,awayTeam);
 
-    const activeMatches = component.getActiveMatches();
+    const activeMatches = service.getActiveMatches();
     const currentMatch =activeMatches[activeMatches.length-1];
 
     expect(currentMatch.homeTeam).toBe(homeTeam)
@@ -36,50 +32,49 @@ describe('ScoreboardLibrary', () => {
     expect(activeMatches.length).toBe(initialActiveMatchesCount+1)
   });
 
+  
   it('should end the active match', () => {
 
     const homeTeam= "Team A";
     const awayTeam="Team B";
 
-    component.startNewMatch(homeTeam,awayTeam);
-    const initialActiveMatchesCount =component.getActiveMatches().length;
-    component.endNewMatch(homeTeam,awayTeam);
-    const activeMatches = component.getActiveMatches();
+    service.startNewMatch(homeTeam,awayTeam);
+    const initialActiveMatchesCount =service.getActiveMatches().length;
+    service.endMatch(homeTeam,awayTeam);
+    const activeMatches = service.getActiveMatches();
     expect(activeMatches.length).toBe(initialActiveMatchesCount-1)
   });
 
-  it('should update match score', () => {
+    it('should update match score', () => {
     const homeTeam= "Team A";
     const awayTeam="Team B";
 
-    component.startNewMatch(homeTeam,awayTeam);
-    component.updateMatchScore(homeTeam,awayTeam,2,3);
-    const activeMatches = component.getActiveMatches();
+    service.startNewMatch(homeTeam,awayTeam);
+    service.updateMatchScore(homeTeam,awayTeam,2,3);
+    const activeMatches = service.getActiveMatches();
     const updatedMatch = activeMatches.find(match=> match.homeTeam === homeTeam && match.awayTeam === awayTeam);
     expect(updatedMatch?.homeTeamScore).toBe(2);
     expect(updatedMatch?.awayTeamScore).toBe(3);
   });
 
-  fit('should get the summary of the active matches', () => {
+  it('should get the summary of the active matches', () => {
 
-    component.startNewMatch("Team A","Team B");
-    component.updateMatchScore("Team A","Team B",6,4);
+    service.startNewMatch("Team A","Team B");
+    service.updateMatchScore("Team A","Team B",6,4);
 
-    component.startNewMatch("Team C","Team D");
-    component.updateMatchScore("Team C","Team D",3,4);
+    service.startNewMatch("Team C","Team D");
+    service.updateMatchScore("Team C","Team D",3,4);
 
-    component.startNewMatch("Team E","Team F");
-    component.updateMatchScore("Team E","Team F",1,3);
+    service.startNewMatch("Team E","Team F");
+    service.updateMatchScore("Team E","Team F",1,3);
 
-    component.startNewMatch("Team G","Team H");
-    component.updateMatchScore("Team G","Team H",7,3);
+    service.startNewMatch("Team G","Team H");
+    service.updateMatchScore("Team G","Team H",7,3);
 
-    component.startNewMatch("Team I","Team J");
-    component.updateMatchScore("Team I","Team J",2,3);
+    service.startNewMatch("Team I","Team J");
+    service.updateMatchScore("Team I","Team J",2,3);
 
-    const matchSummary =component.getMatchSummary();
-
-    console.log(matchSummary)
+    const matchSummary =service.getMatchSummary();
 
     expect(matchSummary[0].homeTeam).toBe("Team G")
     expect(matchSummary[0].homeTeamScore).toBe(7)
@@ -107,6 +102,5 @@ describe('ScoreboardLibrary', () => {
     expect(matchSummary[4].awayTeamScore).toBe(3)
 
   });
+
 });
-
-
