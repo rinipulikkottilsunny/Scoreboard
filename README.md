@@ -19,6 +19,4 @@ After building your library with `ng build scoreboardLibrary`, go to the dist fo
 
 Run `ng test scoreboardLibrary` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
