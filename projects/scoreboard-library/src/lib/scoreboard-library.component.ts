@@ -22,6 +22,10 @@ export class ScoreboardLibraryComponent {
 
   private activeMatches : Match[]=[];
 
+  endNewMatch(homeTeam: string, awayTeam: string) {
+    this.activeMatches=this.activeMatches.filter(match => match.homeTeam !== homeTeam && match.awayTeam !== awayTeam);
+  }
+
   getActiveMatches() : Match[]{
     return this.activeMatches;
   }

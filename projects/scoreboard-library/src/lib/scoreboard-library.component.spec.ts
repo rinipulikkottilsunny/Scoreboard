@@ -23,6 +23,7 @@ describe('ScoreboardLibrary', () => {
     const homeTeam= "Team A";
     const awayTeam="Team B";
 
+    const initialActiveMatchesCount =component.getActiveMatches().length;
     component.startNewMatch(homeTeam,awayTeam);
 
     const activeMatches = component.getActiveMatches();
@@ -32,9 +33,19 @@ describe('ScoreboardLibrary', () => {
     expect(currentMatch.awayTeam).toBe(awayTeam)
     expect(currentMatch.homeTeamScore).toBe(0)
     expect(currentMatch.awayTeamScore).toBe(0)
+    expect(activeMatches.length).toBe(initialActiveMatchesCount+1)
   });
 
   it('should end the active match', () => {
+
+    const homeTeam= "Team A";
+    const awayTeam="Team B";
+
+    component.startNewMatch(homeTeam,awayTeam);
+    const initialActiveMatchesCount =component.getActiveMatches().length;
+    component.endNewMatch(homeTeam,awayTeam);
+    const activeMatches = component.getActiveMatches();
+    expect(activeMatches.length).toBe(initialActiveMatchesCount-1)
   });
 
   it('should update match score', () => {
