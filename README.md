@@ -2,16 +2,14 @@
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0. It can be integrated into a front-end application. The current version does not support backend interaction, which can be achieved in later versions.
 
-## Assumption
-
-If there are active matches, this info can be set using setActiveMatches.
-
 ## The library is capable of
 
 1. To start new match
 2. To finish the active match.
 3. To update the score of the match.
 4. To get the ordered summary of active matches.
+
+ If there are active matches, this info can be set using setActiveMatches.
 
 ## Build
 
