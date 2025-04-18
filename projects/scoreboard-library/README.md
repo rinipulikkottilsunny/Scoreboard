@@ -4,10 +4,10 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 ##  The library is capable of:
 
-To start new match
-To finish the active match
-To update the score of the match
-To get the ordered summary of active matches
+> To start new match
+> To finish the active match
+> To update the score of the match
+> To get the ordered summary of active matches
 
 ## Build
 
