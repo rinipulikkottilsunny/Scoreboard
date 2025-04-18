@@ -1,6 +1,10 @@
 # ScoreboardLibrary
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0. It can be integrated into a front-end application. The current version does not support backend interaction, which can be achieved in later versions.
+
+## Assumption
+
+If there are active matches, this info can be set using setActiveMatches.
 
 ## The library is capable of
 
