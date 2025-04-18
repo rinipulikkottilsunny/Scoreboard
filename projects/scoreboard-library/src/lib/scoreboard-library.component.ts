@@ -20,6 +20,21 @@ interface Match{
 })
 export class ScoreboardLibraryComponent {
 
+  private activeMatches : Match[]=[];
+
+  getMatchSummary() : Match[]{
+
+  const sortedMatches = this.activeMatches
+  .map(match => ({
+    ...match,
+    totalScore: match.homeTeamScore + match.awayTeamScore
+  }))
+  .sort((a, b) =>{
+      return b.totalScore - a.totalScore;
+  });
+  return sortedMatches;
+  }
+
   updateMatchScore(homeTeam: string, awayTeam: string, homeTeamScore: number, awayTeamScore: number) {
     const match =this.activeMatches.find(match => match.homeTeam === homeTeam && match.awayTeam === awayTeam);
     if(match){
@@ -27,8 +42,6 @@ export class ScoreboardLibraryComponent {
       match.awayTeamScore = awayTeamScore;
     }
   }
-
-  private activeMatches : Match[]=[];
 
   endNewMatch(homeTeam: string, awayTeam: string) {
     this.activeMatches=this.activeMatches.filter(match => match.homeTeam !== homeTeam && match.awayTeam !== awayTeam);

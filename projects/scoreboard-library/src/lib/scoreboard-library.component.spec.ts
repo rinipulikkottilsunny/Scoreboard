@@ -61,5 +61,50 @@ describe('ScoreboardLibrary', () => {
   });
 
   it('should get the summary of the active matches', () => {
+
+    component.startNewMatch("Team A","Team B");
+    component.updateMatchScore("Team A","Team B",6,3);
+
+    component.startNewMatch("Team C","Team D");
+    component.updateMatchScore("Team C","Team D",3,4);
+
+    component.startNewMatch("Team E","Team F");
+    component.updateMatchScore("Team E","Team F",1,3);
+
+    component.startNewMatch("Team G","Team H");
+    component.updateMatchScore("Team G","Team H",7,3);
+
+    component.startNewMatch("Team I","Team J");
+    component.updateMatchScore("Team I","Team J",2,3);
+
+    const matchSummary =component.getMatchSummary();
+
+    expect(matchSummary[0].homeTeam).toBe("Team G")
+    expect(matchSummary[0].homeTeamScore).toBe(7)
+    expect(matchSummary[0].awayTeam).toBe("Team H")
+    expect(matchSummary[0].awayTeamScore).toBe(3)
+
+    expect(matchSummary[1].homeTeam).toBe("Team A")
+    expect(matchSummary[1].homeTeamScore).toBe(6)
+    expect(matchSummary[1].awayTeam).toBe("Team B")
+    expect(matchSummary[1].awayTeamScore).toBe(3)
+
+    expect(matchSummary[2].homeTeam).toBe("Team C")
+    expect(matchSummary[2].homeTeamScore).toBe(3)
+    expect(matchSummary[2].awayTeam).toBe("Team D")
+    expect(matchSummary[2].awayTeamScore).toBe(4)
+
+    expect(matchSummary[3].homeTeam).toBe("Team I")
+    expect(matchSummary[3].homeTeamScore).toBe(2)
+    expect(matchSummary[3].awayTeam).toBe("Team J")
+    expect(matchSummary[3].awayTeamScore).toBe(3)
+
+    expect(matchSummary[4].homeTeam).toBe("Team E")
+    expect(matchSummary[4].homeTeamScore).toBe(1)
+    expect(matchSummary[4].awayTeam).toBe("Team F")
+    expect(matchSummary[4].awayTeamScore).toBe(3)
+
   });
 });
+
+
