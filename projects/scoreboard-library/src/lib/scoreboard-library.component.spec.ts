@@ -49,6 +49,15 @@ describe('ScoreboardLibrary', () => {
   });
 
   it('should update match score', () => {
+    const homeTeam= "Team A";
+    const awayTeam="Team B";
+
+    component.startNewMatch(homeTeam,awayTeam);
+    component.updateMatchScore(homeTeam,awayTeam,2,3);
+    const activeMatches = component.getActiveMatches();
+    const updatedMatch = activeMatches.find(match=> match.homeTeam === homeTeam && match.awayTeam === awayTeam);
+    expect(updatedMatch?.homeTeamScore).toBe(2);
+    expect(updatedMatch?.awayTeamScore).toBe(3);
   });
 
   it('should get the summary of the active matches', () => {

@@ -20,6 +20,14 @@ interface Match{
 })
 export class ScoreboardLibraryComponent {
 
+  updateMatchScore(homeTeam: string, awayTeam: string, homeTeamScore: number, awayTeamScore: number) {
+    const match =this.activeMatches.find(match => match.homeTeam === homeTeam && match.awayTeam === awayTeam);
+    if(match){
+      match.homeTeamScore = homeTeamScore;
+      match.awayTeamScore = awayTeamScore;
+    }
+  }
+
   private activeMatches : Match[]=[];
 
   endNewMatch(homeTeam: string, awayTeam: string) {
