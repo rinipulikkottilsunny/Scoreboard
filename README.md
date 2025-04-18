@@ -1,8 +1,9 @@
 # ScoreboardLibrary
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0. It can be integrated into a front-end application. The current version does not support backend interaction, which can be achieved in later versions.
+Also library can be extended and used for other sports matches as well.
 
-## The library is capable of
+## The football scoreboard is capable of
 
 1. To start new match
 2. To finish the active match.
